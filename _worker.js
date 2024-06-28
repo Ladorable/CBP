@@ -79,7 +79,7 @@ export default {
                         const wowConfig = await getWoWConfig(env, client);
                         return new Response(`${JSON.stringify(wowConfig, null, 4)}`, { status: 200 });
 
-                    case '/panel':
+                    case '/fuckoff':
 
                         if (typeof env.bpb !== 'object') {
                             const errorPage = renderErrorPage('KV Dataset is not properly set!', null, true);
@@ -123,7 +123,7 @@ export default {
                         }
 
                         const loginAuth = await Authenticate(request, env);
-                        if (loginAuth) return Response.redirect(`${url.origin}/panel`, 302);
+                        if (loginAuth) return Response.redirect(`${url.origin}/fuckoff`, 302);
 
                         let secretKey = await env.bpb.get('secretKey');
                         const pwd = await env.bpb.get('pwd');
@@ -179,7 +179,7 @@ export default {
                             }
                         });        
 
-                    case '/panel/password':
+                    case '/fuckoff/password':
 
                         let passAuth = await Authenticate(request, env);
                         if (!passAuth) return new Response('Unauthorized!', { status: 401 });           
@@ -2386,7 +2386,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                 const applyButtonVal = applyButton.value;
                 applyButton.value = '⌛ Loading...';
 
-                const response = await fetch('/panel', {
+                const response = await fetch('/fuckoff', {
                     method: 'POST',
                     body: formData,
                     credentials: 'include'
@@ -2452,7 +2452,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
             }
                     
             try {
-                const response = await fetch('/panel/password', {
+                const response = await fetch('/fuckoff/password', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'text/plain'
@@ -2588,7 +2588,7 @@ const renderLoginPage = async () => {
                 });
             
                 if (response.ok) {
-                    window.location.href = '/panel';
+                    window.location.href = '/fuckoff';
                 } else {
                     passwordError.textContent = '⚠️ Wrong Password!';
                     const errorMessage = await response.text();
